@@ -20,7 +20,7 @@ class Count {
 
 
 exports.healthCheck = (call, callback) => {
-  console.log('HEALTH CHECK IS CALLED');
+  // console.log('HEALTH CHECK IS CALLED');
   const res = new pb.HealthResponse()
     .setStatus(200)
     .setMessage('OK');
@@ -105,7 +105,7 @@ exports.storeRedisData = (call, callback) => {
 
       const request_count = Count.getCount()
       const data = `${request_count} ${timeRequired.toString()}\n`
-      // console.log("count", Count.getCount(), " rps: ", rps)
+      console.log("REQUEST COUNT : ", request_count)
       if (prev_file !== file_name) {
         prev_file = file_name
         console.log("1 Process Ended reinital request count", prev_file)
