@@ -1,0 +1,29 @@
+{
+  "name": "grpc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pb:gen": "./scripts/gen.sh greet",
+    "server": "node greet/server/index.js",
+    "client": "node greet/client/index.js",
+    "dev:server": "nodemon greet/server/index.js",
+    "dev:client": "nodemon greet/client/index.js",
+    "ssl:gen": "./scripts/ssl.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.9.0",
+    "dotenv": "^16.3.1",
+    "google-protobuf": "^3.21.2",
+    "grpc-server-reflection": "^0.1.5",
+    "ioredis": "^5.3.2",
+    "node-statsd": "^0.1.1"
+  },
+  "devDependencies": {
+    "grpc-tools": "^1.12.4",
+    "nodemon": "^3.0.1"
+  }
+}

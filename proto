@@ -1,0 +1,28 @@
+
+‘
+greet/proto/greet.protoGreet"-
+GreetRequest
+
+first_name (	R	firstName"'
+GreetResponse
+result (	Rresult"|
+RedisRequest
+type (	Rtype
+key (	Rkey
+value (	Rvalue
+count (	Rcount
+filename (	Rfilename"A
+RedisResponse
+status (Rstatus
+message (	Rmessage"
+HealthRequest"B
+HealthResponse
+status (Rstatus
+message (	Rmessage2ø
+GreetService2
+Greet.Greet.GreetRequest.Greet.GreetResponse=
+GreetManyTimes.Greet.GreetRequest.Greet.GreetResponse08
+	LongGreet.Greet.GreetRequest.Greet.GreetResponse(>
+ManyLongGreet.Greet.GreetRequest.Greet.GreetResponse(0?
+StoreRedisData.Greet.RedisRequest.Greet.RedisResponse(0:
+HealthCheck.Greet.HealthRequest.Greet.HealthResponsebproto3

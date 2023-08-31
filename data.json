@@ -1,0 +1,6 @@
+{
+  "type": "11",
+  "key":"redis_key",
+  "value":"redis_value",
+  "count":"500000"
+}

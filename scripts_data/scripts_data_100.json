@@ -1,0 +1,57 @@
+{
+  "base_url":"65.0.81.82:5051",
+  "request_data" : [
+    {
+      "number_of_request":100000,
+      "clients":100,
+      "workers":1000,
+      "data_file_path" : "./data.json",
+      "proto_file":"./greet/proto/greet.proto",
+      "proto_service":"Greet.GreetService/StoreRedisData"
+    },
+    {
+      "number_of_request":500000,
+      "clients":100,
+      "workers":1000,
+      "data_file_path" : "./data.json",
+      "proto_file":"./greet/proto/greet.proto",
+      "proto_service":"Greet.GreetService/StoreRedisData"
+    },
+    {
+      "number_of_request":1000000,
+      "clients":100,
+      "workers":1000,
+      "max_concurrent_streams":1000,
+      "data_file_path" : "./data.json",
+      "proto_file":"./greet/proto/greet.proto",
+      "proto_service":"Greet.GreetService/StoreRedisData"
+    },
+    {
+      "number_of_request":2000000,
+      "clients":100,
+      "workers":1000,
+      "max_concurrent_streams":1000,
+      "data_file_path" : "./data.json",
+      "proto_file":"./greet/proto/greet.proto",
+      "proto_service":"Greet.GreetService/StoreRedisData"
+    },
+    {
+      "number_of_request":3000000,
+      "clients":100,
+      "workers":1000,
+      "max_concurrent_streams":1000,
+      "data_file_path" : "./data.json",
+      "proto_file":"./greet/proto/greet.proto",
+      "proto_service":"Greet.GreetService/StoreRedisData"
+    },
+    {
+      "number_of_request":5000000,
+      "clients":100,
+      "workers":1000,
+      "max_concurrent_streams":1000,
+      "data_file_path" : "./data.json",
+      "proto_file":"./greet/proto/greet.proto",
+      "proto_service":"Greet.GreetService/StoreRedisData"
+    }
+  ]
+}

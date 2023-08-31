@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package Greet;
+
+message GreetRequest {
+  string first_name = 1;
+}
+
+message GreetResponse {
+  string result = 1;
+}
+
+
+message RedisRequest {
+  string type = 1;
+  string key = 2;
+  string value = 3;
+  string count = 4;
+  string filename = 5;
+}
+
+message RedisResponse {
+  int32 status = 1;
+  string message = 2;
+}
+
+message HealthRequest {
+
+}
+
+message HealthResponse {
+  int32 status = 1;
+  string message = 2;
+}
+
+service GreetService {
+  rpc Greet (GreetRequest) returns (GreetResponse);
+  //server streaming
+  rpc GreetManyTimes (GreetRequest) returns (stream GreetResponse); 
+  
+  //client streaming
+  rpc LongGreet (stream GreetRequest) returns (GreetResponse); 
+  
+  //client-server streaming
+  rpc ManyLongGreet (stream GreetRequest) returns (stream GreetResponse); 
+
+  rpc StoreRedisData (stream RedisRequest) returns (stream RedisResponse);
+  rpc HealthCheck (HealthRequest) returns (HealthResponse);
+}
+
+//Service Descriptors:
+// A service descriptor is a critical component of a gRPC service definition. 
+// It is defined using Protocol Buffers (protobuf) syntax in a .proto file. 
+// The service descriptor specifies the methods that a gRPC service provides, 
+// along with the input and output message types for each method.
+//  Essentially, it defines the API contract that both the client and server must adhere to.
+
+
+/*
+Client Stubs:
+Once you have defined your gRPC service using a service descriptor, 
+you can use the gRPC tooling to generate code for both the client and server.
+On the client side, one of the key components generated is the client stub.
+A client stub is a class that acts as a proxy for making RPC calls to the remote server. 
+It abstracts away the complexities of network communication, serialization, and deserialization of messages.
+*/

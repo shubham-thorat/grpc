@@ -1,0 +1,78 @@
+ghz --insecure -n 100000 -c 1 --connections 1 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_1000_100000.json"}' 43.204.108.195:5051 --output=./output/logs/output_client_1_100000.json --format=pretty --debug=./debug.txt
+ghz --insecure -n 500000 -c 1000 --connections 1 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_1000_500000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_1_500000.json --format=pretty --debug=./debug.txt
+ghz --insecure -n 1000000 -c 1000 --connections 1 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_1000_1000000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_1_1000000.json --format=pretty --debug=./debug.txt
+ghz --insecure -n 2000000 -c 1000 --connections 1 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_1000_2000000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_1_2000000.json --format=pretty --debug=./debug.txt
+ghz --insecure -n 3000000 -c 1000 --connections 1 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_1000_3000000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_1_3000000.json --format=pretty --debug=./debug.txt
+ghz --insecure -n 5000000 -c 1000 --connections 1 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_1000_5000000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_1_5000000.json --format=pretty --debug=./debug.txt
+
+# connections = clients
+# c = concurrency .... worker
+
+# -c 1 -r 10000 -z 5m --connections 1 
+
+concurrency = 1000
+connections = clients = 1
+r = rps = 10000
+-z = duration = 3000s
+
+ghz --insecure -c 1000 --rps 10000 -z 300s --connections 1 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_1_300_10000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_1_300_10000.json --format=pretty --debug=./debug.txt
+
+ghz --insecure -c 1000 --rps 50000 -z 300s --connections 5 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_1_300_50000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_1_300_50000.json --format=pretty --debug=./debug.txt
+
+ghz --insecure -c 1000 --rps 50000 -z 300s --connections 20 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_20_300_50000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_20_300_50000.json --format=pretty --debug=./debug.txt
+
+
+ghz --insecure -c 100000 --rps 50000 -z 300s --connections 20 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_20_300_50000.1.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_20_300_50000.1.json --format=pretty --debug=./debug.txt
+
+
+
+
+ghz --insecure -c 1000 --rps 20000 -z 300s --connections 1 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_1_300_20000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_1_300_20000.json --format=pretty --debug=./debug.txt
+
+ghz --insecure -c 1000 --rps 50000 -z 300s --connections 5 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_5_300_50000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_5_300_50000.json --format=pretty --debug=./debug.txt
+
+ghz --insecure -c 1000 --rps 50000 -z 300s --connections 20 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_20_300_50000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_20_300_50000.json --format=pretty --debug=./debug.txt
+
+ghz --insecure -c 5000 --rps 50000 -z 300s --connections 50 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_50_300_50000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_50_300_50000.json --format=pretty --debug=./debug.txt
+
+ghz --insecure -c 10000 --rps 50000 -z 300s --connections 100 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_100_300_50000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_100_300_50000.json --format=pretty --debug=./debug.txt
+
+
+5. ghz --insecure -c 10000 --rps 50000 -z 300s --connections 200 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_200_300_50000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_200_300_50000.json --format=pretty --debug=./debug.txt
+
+6. ghz --insecure -c 10000 --rps 50000 -z 300s --connections 50 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_300_300_50000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_300_300_50000.json --format=pretty --debug=./debug.txt
+
+7. ghz --insecure -c 10000 --rps 60000 -z 300s --connections 50 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_50_300_60000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_50_300_60000.json --format=pretty --debug=./debug.txt
+
+8. ghz --insecure -c 10000 --rps 60000 -z 300s --connections 500 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_500_300_60000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_500_300_60000.json --format=pretty --debug=./debug.txt
+
+
+
+
+ghz --insecure -c 10000 --rps 50000 -z 300s --connections 300 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_300_300_50000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_300_300_50000.json --format=pretty --debug=./debug.txt
+
+ghz --insecure -c 10000 --rps 50000 -z 300s --connections 50 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_500_300_50000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_500_300_50000.json --format=pretty --debug=./debug.txt
+
+ghz --insecure -c 100000 --rps 50000 -z 300s --connections 500 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_500_300_50000_100000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_500_300_50000_100000.json --format=pretty --debug=./debug.txt
+
+
+ghz --insecure -c 100000 -z 300s --connections 500 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_500_300.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_500_300.json --format=pretty --debug=./debug.txt
+
+ghz --insecure -c 100000 -z 300s --connections 400 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_400_300.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_400_300.json --format=pretty --debug=./debug.txt
+
+ghz --insecure -c 100000 -z 300s --connections 400 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_400_300.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_400_300.json --format=pretty --debug=./debug.txt
+
+
+
+
+
+
+
+
+1. ghz --insecure -c 1000 --rps 20000 -z 300s --connections 10 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_10_300_20000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_10_300_20000.json --format=pretty --debug=./debug.txt
+
+2. ghz --insecure -c 1000 --rps 20000 -z 300s --connections 5 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_5_300_20000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_5_300_20000.json --format=pretty --debug=./debug.txt
+
+3. ghz --insecure -c 1000 --rps 50000 -z 300s --connections 10 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_10_300_20000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_10_300_20000.json --format=pretty --debug=./debug.txt
+
+4. ghz --insecure -c 1000 --rps 50000 -z 300s --connections 50 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_50_300_20000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_50_300_20000.json --format=pretty --debug=./debug.txt
