@@ -83,7 +83,6 @@ exports.manyLongGreet = (call, calback) => {
 let prev_file = ''
 exports.storeRedisData = (call, callback) => {
   const startTime = Date.now();
-  console.log("REQUEST RECEIVED")
   client.timing('request_received', 1);
   call.on('data', (req) => {
     RedisClient.setKey(req.getKey(), req.getValue()).then(response => {
