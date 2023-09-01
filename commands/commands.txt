@@ -25,9 +25,9 @@ ghz --insecure -c 1000 --rps 50000 -z 300s --connections 20 --proto ./greet/prot
 ghz --insecure -c 100000 --rps 50000 -z 300s --connections 20 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_20_300_50000.1.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_20_300_50000.1.json --format=pretty --debug=./debug.txt
 
 
+cb-stage-grpc-alb-533232360.ap-south-1.elb.amazonaws.com
 
-
-ghz --insecure -c 1000 --rps 20000 -z 300s --connections 1 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_1_300_20000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_1_300_20000.json --format=pretty --debug=./debug.txt
+ghz --insecure -c 1000 --rps 20000 -z 300s --connections 1 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_1_300_20000.json"}' cb-stage-grpc-alb-533232360.ap-south-1.elb.amazonaws.com --output=./output/logs/output_client_1_300_20000.json --format=pretty --debug=./debug.txt
 
 ghz --insecure -c 1000 --rps 50000 -z 300s --connections 5 --proto ./greet/proto/greet.proto --call Greet.GreetService/StoreRedisData -d '{"type": "11", "key": "redis_key", "value": "redis_value", "count": "500000", "filename": "output_server_5_300_50000.json"}' 3.109.186.107:5051 --output=./output/logs/output_client_5_300_50000.json --format=pretty --debug=./debug.txt
 
