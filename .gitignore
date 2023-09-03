@@ -5,3 +5,5 @@ debug.txt
 node_modules
 
 .env
+
+load_test_output
