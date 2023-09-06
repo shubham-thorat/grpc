@@ -97,7 +97,7 @@ exports.storeRedisData = (call, callback) => {
 
       const request_count = Count.getCount()
 
-      console.log("REQUEST COUNT : ", request_count)
+      console.log("REQUEST COUNT : ", request_count, " timeRequired: ", `${timeRequired}ms`)
 
       client.timing('response_time', timeRequired);
       client.timing('request_end', 1)
