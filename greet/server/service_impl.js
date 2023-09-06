@@ -78,7 +78,7 @@ exports.manyLongGreet = (call, calback) => {
 
 exports.storeRedisData = (call, callback) => {
   const startTime = Date.now();
-  client.timing('grpc_request_received', 1);
+  client.timing('request_received', 1);
   call.on('data', (req) => {
     RedisClient.setKey(req.getKey(), req.getValue()).then(response => {
       let res;
@@ -97,10 +97,10 @@ exports.storeRedisData = (call, callback) => {
 
       const request_count = Count.getCount()
 
-      console.log("REQUEST COUNT : ", request_count)
+      console.log("REQUEST COUNT : ", request_count, " timeRequired: ", `${timeRequired}ms`)
 
-      client.timing('grpc_response_time', timeRequired);
-      client.timing('grpc_response_send', 1)
+      client.timing('response_time', timeRequired);
+      client.timing('request_end', 1)
       call.write(res);
 
     }).catch(error => {
