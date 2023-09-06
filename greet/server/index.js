@@ -42,7 +42,7 @@ function main() {
 
   // addReflection(server, path.join(__dirname, '../proto/greet_grpc_pb.js'))
 
-  const tls = false;
+  const tls = true;
   let creds;
   if (tls) {
     const rootCert = fs.readFileSync(path.join(__dirname, '../../ssl/ca.crt'));
@@ -58,16 +58,13 @@ function main() {
   }
   console.log("Address : ", addr)
   server.bindAsync(addr, creds, (err, _) => {
-    console.log('first')
 
     if (err) {
       console.log("error", err)
       return cleanup(server);
     }
     if (!fs.existsSync('./output')) {
-      console.log('hello')
-      fs.mkdirSync('./output');
-      console.log('Output Folder created')
+      fs.mkdirSync('./output')
     }
     server.start();
   });

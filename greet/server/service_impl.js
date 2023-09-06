@@ -76,17 +76,11 @@ exports.manyLongGreet = (call, calback) => {
   call.on('end', () => call.end());
 }
 
-
-
-
-
-let prev_file = ''
 exports.storeRedisData = (call, callback) => {
   const startTime = Date.now();
   client.timing('request_received', 1);
   call.on('data', (req) => {
     RedisClient.setKey(req.getKey(), req.getValue()).then(response => {
-      const file_name = req.getFilename() ?? 'output_server.log'
       let res;
       if (response) {
         res = new pb.RedisResponse()
@@ -100,23 +94,11 @@ exports.storeRedisData = (call, callback) => {
       const endTime = Date.now();
       const timeRequired = endTime - startTime;
       Count.increment()
-      let path = `./output/logs/${file_name}`
 
       const request_count = Count.getCount()
-      const data = `${request_count} ${timeRequired.toString()}\n`
-      console.log("REQUEST COUNT : ", request_count)
-      if (prev_file !== file_name) {
-        prev_file = file_name
-        console.log("1 Process Ended reinital request count", prev_file)
-        console.log("request_count", Count.getCount())
-        Count.setInitial()
-      }
 
-      fs.appendFile(path, data, (err) => {
-        if (err) {
-          console.log("Error occurred while appending data to file : ", path, err)
-        }
-      })
+      console.log("REQUEST COUNT : ", request_count)
+
       client.timing('response_time', timeRequired);
       client.timing('request_end', 1)
       call.write(res);
