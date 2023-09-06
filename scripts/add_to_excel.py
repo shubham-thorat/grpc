@@ -16,35 +16,30 @@ def extractNumber(filePath):
     else:
         return None
     
-def read_file(filename,duration,rps):
+def read_file(filename):
     try:
         json_data = {}
         with open(filename) as data:
             json_data = json.load(data)
 
-        total = int(duration) * int(rps) * int(json_data['options']['connections'])
         data = {
-            'total_requests':total,
-            'processed_log_file': filename,
-            'clients': json_data['options']['connections'],
-            'workers': json_data['options']['concurrency'],
-            'request_count': json_data['options']['total'],
-            'min_time': f"{round(json_data['fastest'] / 1000000, 4)}ms",
-            'max_time': f"{round(json_data['slowest']  / 1000000, 4)}ms",
-            'mean': f"{round(json_data['average']  / 1000000, 4)}ms",
-            'rps': f"{round(json_data['options']['rps'], 2)}",
-            "success_request": json_data['count'],
-            "duration": f"{round(json_data['options']['duration'] / 1000000000,3)}s"
+            "connections": json_data['options']['connections'],
+            "concurrency": json_data['options']['concurrency'],
+            "duration": f"{round(json_data['options']['duration'] * 1e-6,2)}",
+            "req_per_sec_input":f"{round(json_data['options']['rps'],3)}",
+            "req_per_sec":f"{round(json_data['rps'],3)}",
+            "min_latency":f"{round(json_data['fastest'] * 1e-6,3)}",
+            "max_latency":f"{round(json_data['slowest'] * 1e-6,3)}",
         }
 
         for percentage in json_data['latencyDistribution']:
             print(percentage)
             if percentage['percentage'] == 50:
-                data["50th_percentile"] = f"{round(percentage['latency'] / 1000000, 4)}ms"
+                data["50th_percentile"] = f"{round(percentage['latency'] * 1e-6, 3)}"
             if percentage['percentage'] == 90:
-                data["90th_percentile"] = f"{round(percentage['latency'] / 1000000, 4)}ms"
+                data["90th_percentile"] = f"{round(percentage['latency'] * 1e-6, 3)}"
             if percentage['percentage'] == 99:
-                data["99th_percentile"] = f"{round(percentage['latency'] / 1000000, 4)}ms"
+                data["99th_percentile"] = f"{round(percentage['latency'] * 1e-6, 3)}"
 
         return data
     except FileNotFoundError:
@@ -56,13 +51,11 @@ def read_file(filename,duration,rps):
 
 def addToJSONFile(file_path, latencies_data):
     try:
-        print("file add to json file")
+        
         if path.isfile(file_path) is False:
-            print("file opened")
             fp = open(file_path, "w")
             fp.close()
-            print("file closed")
-
+        
         dict_obj = []
         with open(file_path) as fp:
             try:
@@ -82,19 +75,19 @@ def addToJSONFile(file_path, latencies_data):
         print(f"An error occurred addToJSONFile: {e}")
 
 
-def convertJSONToArray(item):
+def convertJSONToArray(index,item):
     return [
-        item['total_requests'],
-        item['success_request'],
-        item['clients'],
+        index,
+        item['connections'],
+        item['concurrency'],
         item['duration'],
-        item['rps'],
-        item['min_time'],
-        item['mean'],
-        item['max_time'],
-        item["50th_percentile"],
-        item["90th_percentile"],
-        item["99th_percentile"],
+        item['req_per_sec_input'],
+        item['req_per_sec'],
+        item['50th_percentile'],
+        item['90th_percentile'],
+        item['99th_percentile'],
+        item["min_latency"],
+        item["max_latency"]
     ]
 
 
@@ -106,10 +99,12 @@ def addJSONToExcel(inputJSONFile, outputXlsxFile):
         sheet_name = 'GRPC'  # Change this to the desired sheet name
         sheet = wb[sheet_name]
         index = sheet.max_row + 1
+        sheet.append([])
+        print("Starting row : ",index)
+        index += 1
         for item in data:
             try:
-                row = convertJSONToArray(item)
-                row.insert(0, index)
+                row = convertJSONToArray(index,item)
                 sheet.append(row)
                 index += 1
             except Exception as e:
@@ -132,27 +127,23 @@ def extractNumber(filePath):
 def main():
     try:
         # Find all files matching the pattern "output_*.log"
-        file_pattern = "./output/logs/output_client_*.json"
+        file_pattern = "./result/output_client_*.json"
         matching_files = glob.glob(file_pattern)
-        output_file = './output/json/result_client.json'
 
         if not matching_files:
             print('No Matching files found')
             return
+        
+        output_file = './output.json'
         # Read the content of each matching file
         for file_path in matching_files:
-            print("file = ", file_path)
-            [clients,duration, rps] = extractNumber(filePath=file_path)
-            result = read_file(filename=file_path,duration=duration,rps=rps)
-            print("result = ", result)
+            result = read_file(filename=file_path)
             if result:
                 addToJSONFile(file_path=output_file, latencies_data=result)
             else:
                 print(f"File Empty {file_path}")
 
-        print(
-            f'** Processed logs file & result added to JSON File {output_file}**')
-        excel_file = 'load_test_grpc.xlsx'
+        excel_file = 'Load_Test.xlsx'
         addJSONToExcel(inputJSONFile=output_file, outputXlsxFile=excel_file)
         print(f'Succesfully added to Excel file {excel_file}')
     except Exception as e:
